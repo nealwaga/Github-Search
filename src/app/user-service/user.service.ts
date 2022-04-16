@@ -24,5 +24,9 @@ export class UserService {
      + "&clientSecret=" +environment.clientSecret);
   }
 
+  getRepoInfo() {
+    return this.http.get("https://api.github.com/users/" + this.userName + "/repos?clientId=" + environment.clientId + "&clientSecret=" +environment.clientSecret);
+  }
+
 
 }
