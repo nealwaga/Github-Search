@@ -22,8 +22,17 @@ export class UserService {
     console.log("Service is ready");
 
     this.profile = new User("", 0, "", "", "", new Date, 0, 0, "");
-    this.userName = "melissakobia";
+    this.userName = "nealwaga";
    }
+
+   getUsers(){
+    return this.http.get("https://api.github.com/users/" + this.userName + "?clientId=" + environment.clientId
+    + "&clientSecret=" + environment.clientSecret);
+  }
+
+  getRepos(){
+    return this.http.get("https://api.github.com/users/" + this.userName + "/repos?clientId=" + environment.clientId + "&clientSecret=" + environment.clientSecret);
+  }
 
    getUserInfo() {
     interface ApiResponse {

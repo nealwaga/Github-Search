@@ -27,6 +27,16 @@ export class MainPageComponent implements OnInit {
       private userService: UserService, private repositoryService: RepositoryService
   
     ) {
+
+      this.userService.getUsers().subscribe(profile => {
+        console.log(profile);
+        this.profile = profile;
+      });
+  
+      this.userService.getRepos().subscribe(repos => {
+        console.log(repos);
+        this.repos = repos;
+      })
   
     }
   
