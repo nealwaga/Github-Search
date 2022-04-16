@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user-service/user.service';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../user';
-//import { RepositoryService } from '../repository-service/repository-service.service';
+import { RepositoryService } from '../repository-service/repository-service.service';
 
 
 
