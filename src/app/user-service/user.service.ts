@@ -5,43 +5,62 @@ import { map } from 'rxjs/operators'
 
 import { from } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  private userName:string;
 
+export class UserService {
+//  private userName: string;
+
+   private repoName: string;
+   profile: User;
+   userName:string;
 
   constructor(private http:HttpClient) {
     console.log("Service is ready");
+
+    this.profile = new User("", 0, "", "", "", new Date, 0, 0, "");
     this.userName = "melissakobia";
    }
 
-// function getting user info using API
-  getUserInfo() {
-    return this.http.get("https://api.github.com/users/" + this.userName + "?clientId=" + environment.clientId
-     + "&clientSecret=" +environment.clientSecret);
+   getUserInfo() {
+    interface ApiResponse {
+      name: string;
+      public_repo: number;
+      avatar_url: string;
+      login: string;
+      company: string;
+      created_at: Date;
+      following: number;
+      followers: number;
+      html_url: string;
+
+    }
+
+    let promise = new Promise((resolve, reject) => {
+        this.http.get<ApiResponse>("https://api.github.com/users/" + this.userName + "?clientId=" + environment.clientId
+          + "&clientSecret=" + environment.clientSecret).toPromise().then(response => {
+  
+            this.profile = response      
+
+            resolve()
+        },
+          error => {
+            //this.profile.name = "Error"
+            //this.quote.author = "Winston Churchill"
+
+            reject(error)
+          })
+    })
+    return promise
   }
 
-// function getting user repos  
-  getRepoInfo() {
-    return this.http.get("https://api.github.com/users/" + this.userName + "/repos?clientId=" + environment.clientId + "&clientSecret=" +environment.clientSecret);
-  }
-
-   // getUserInfo() {
-  //   return this.http.get("https://api.github.com/repos/users/"+this.userName+"/issues?state=closed&access_token=945f965fc6d9c2c28798a70431e7dc37121d321f");
-  // }
-
-  // getRepoInfo(){
-  //   return this.http.get("https://api.github.com/repos/users/"+this.userName+"/repos/issues?state=closed&access_token=945f965fc6d9c2c28798a70431e7dc37121d321f");
-  // }
 
 
-// function updating the username when searching
-  updateUser (userName : string) {
+  updateUser(userName:string) {
     this.userName = userName;
-
 
   }
 
