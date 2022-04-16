@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { RepositoryComponent } from './repository/repository.component';
+import { UserServiceComponent } from './user-service/user-service.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     MainPageComponent,
-    RepositoryComponent
+    RepositoryComponent,
+    UserServiceComponent
   ],
   imports: [
     BrowserModule,
