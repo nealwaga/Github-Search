@@ -6,6 +6,7 @@ import { ApiService } from '../api.service';
   templateUrl: './gh-user.component.html',
   styleUrls: ['./gh-user.component.css']
 })
+
 export class GhUserComponent implements OnInit {
 
   user!: any;

@@ -6,9 +6,10 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ApiService {
   user = 'nealwaga'    //created a variable 
-  GH_API = `https://api.github.com/users/defunkt/${this.user}`  //made it a template variable using backticks 
+  GH_API = `https://api.github.com/users/${this.user}`  //made it a template variable using backticks 
 
   constructor (private http: HttpClient) { }
 
