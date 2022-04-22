@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+import { UserserviceService } from '../services/userservice.service';
 
 @Component({
   selector: 'app-gh-user',
@@ -9,16 +9,25 @@ import { ApiService } from '../api.service';
 
 export class GhUserComponent implements OnInit {
 
-  user!: any;
-  constructor (private apiService: ApiService) { }
+  user: any = []
+  repo: any = []
+  username!: string
+
+  constructor (private myservice: UserserviceService) {
+//finding user    
+    this.myservice.findUser ().subscribe (user => {this.user = user;})
+//finding repo    
+    this.myservice.findRepo ().subscribe (repo => {this.repo = repo;})
+  } 
+
+//func for getting user
+  getUser () {this.myservice.anUpdate (this.username)
+     this.myservice.findUser ().subscribe (user => {this.user = user;});
+     this.myservice.findRepo ().subscribe (repo => {this.repo = repo;})
+  }  
 
   ngOnInit(): void {
-    this.apiService.getGithubUser().subscribe (
-      data => {
-        this.user = data
-        console.log (this.user);
-      }
-    )  
+    
   }
 
 }

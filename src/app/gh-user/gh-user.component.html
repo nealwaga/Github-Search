@@ -3,8 +3,31 @@
     <p> Name: {{user.name}} </p>
     <img src="{{user.avatar_url}}" alt="">
     <p> Bio: {{user.bio}} </p>
+    <p> Followers: {{user.followers}} </p>
+    <p> Following: {{user.following}} </p>
     <p> Github URL: <a href="{{user.html_url}}">See on Github</a></p>
 </div>
+<form >
+    <div class="form-group">
+        <input type="text" name="neal" class="form-control" [(ngModel)]="username">
+        <button class="btn-success" (click)="getUser ()"> Click </button>
+    </div>
+</form>
+<h2> User Repos </h2>
+<div class="container-fluid" *ngFor="let myrepo of repo">
+    <p> {{myrepo.name}} </p>
+    <p> {{myrepo.description}}</p>
+<!--    <ul *ngFor="let repo of userRepos">
+       <li> {{repo.name}} </li>
+    </ul> -->
+</div>
+
+
+
+
+
+
+
 
 
 
